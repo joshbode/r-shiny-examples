@@ -2,7 +2,7 @@ library(shiny)
 
 # list of tools - could be dynamicaly generated
 menus = tagList(
-  tabPanel("JB", id='home', h1('Welcome!')),
+  tabPanel("Home", id='home', h1('Welcome!')),
   tabPanel("Menu 0", id='menu_0', p('Hi!'), textOutput('ABC')),
   navbarMenu("Menu 1",
     navbarMenu("Menu 1.1",
@@ -20,12 +20,14 @@ shinyUI(
   fluidPage(
     tags$head(tags$link(rel='stylesheet', type='text/css', href='style.css')),
     nav(menus, id='tool', brand='home'),
-    headerPanel('Header Panel'),
-    sidebarPanel('Sidebar Panel'),
-    mainPanel(
-      p('Main Panel'),
-      textOutput('char'),
-      tabs(menus, id='tabs', brand='home')
+    titlePanel('Title Panel'),
+    sidebarLayout(
+      sidebarPanel(width=3,
+        textOutput('char')
+      ),
+      mainPanel(
+        tabs(menus, id='tabs', brand='home')
+      )
     )
   )
 )

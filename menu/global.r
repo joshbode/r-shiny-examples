@@ -15,11 +15,17 @@ walk_nav = function(x, brand='', level=1) {
       )
     } else if (obj$attribs$class == 'tab-pane') {
       if (obj$attribs$id == brand) {
-        class = 'brand'
+        a_class = 'brand'
+        li_class = 'active'
       } else {
-        class = NULL
+        a_class = NULL
+        li_class = NULL
       }
-      return(tags$li(tags$a(class=class, href=paste0('#', obj$attribs$id), `data-toggle`='tab', `data-value`=obj$attribs$id, obj$attribs$title)))
+      return(tags$li(class=li_class,
+        tags$a(class=a_class, `data-toggle`='tab', `data-value`=obj$attribs$id,
+          href=paste0('#', obj$attribs$id), obj$attribs$title
+        )
+      ))
     } else {
       stop(paste0('Unexpected tag: ', obj))
     }
